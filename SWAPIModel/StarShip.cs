@@ -1,16 +1,15 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace SWAPIModel
 {
     public class StarShip : IStarShip
     {
-        private const int yearDayCount = 365;
-        private const int dayHourCount = 24;
-        private const int monthDayCount = 30;
-        private const int weekDayCount = 7;
+        private const int YearDayCount = 365;
+        private const int DayHourCount = 24;
+        private const int MonthDayCount = 30;
+        private const int WeekDayCount = 7;
 
         [JsonProperty("name")]
         public string Name {get; set;}
@@ -19,25 +18,25 @@ namespace SWAPIModel
         [JsonProperty("manufacturer")]
         public string Manufacturer {get; set;}
         [JsonProperty("cost_in_credits")]
-        public string Cost_in_credits {get; set;}
+        public string CostInCredits {get; set;}
         [JsonProperty("length")]
         public double Length {get; set;}
         [JsonProperty("max_atmosphering_speed")]
-        public string Max_atmosphering_speed {get; set;}
+        public string MaxAtmospheringSpeed {get; set;}
         [JsonProperty("crew")]
         public int Crew {get; set;}
         [JsonProperty("passengers")]
         public int Passengers {get; set;}
         [JsonProperty("cargo_capacity")]
-        public string Cargo_capacity {get; set;}
+        public string CargoCapacity {get; set;}
         [JsonProperty("consumables")]
         public string Consumables {get; set;}
         [JsonProperty("hyperdrive_rating")]
-        public double Hyperdrive_rating {get; set;}
+        public double HyperdriveRating {get; set;}
         [JsonProperty("MGLT")]
-        public int MGLT {get; set;}
+        public int Mglt {get; set;}
         [JsonProperty("starship_class")]
-        public string Starship_class {get; set;}
+        public string StarshipClass {get; set;}
         [JsonProperty("pilots")]
         public List<string> Pilots {get; set;}
         [JsonProperty("films")]
@@ -52,8 +51,8 @@ namespace SWAPIModel
         public int CountStops(int distance)
         {
             var consumables = ConsumablesInHoursAsync(Consumables);
-            if (distance == 0 || MGLT == 0 || consumables == 0) return 0;
-            return distance / (consumables * MGLT);
+            if (distance == 0 || Mglt == 0 || consumables == 0) return -1;
+            return distance / (consumables * Mglt);
         }
 
         private int ConsumablesInHoursAsync(string consumables)
@@ -67,25 +66,25 @@ namespace SWAPIModel
                 case TimeParts.Year :
                 case TimeParts.Years:
                 {
-                    value = value * yearDayCount * dayHourCount;
+                    value = value * YearDayCount * DayHourCount;
                     break;
                 }
                 case TimeParts.Month:
                 case TimeParts.Months:
                 {
-                    value = value * monthDayCount * dayHourCount;
+                    value = value * MonthDayCount * DayHourCount;
                     break;
                 }
                 case TimeParts.Week:
                 case TimeParts.Weeks:
                 {
-                    value = value * weekDayCount * dayHourCount;
+                    value = value * WeekDayCount * DayHourCount;
                     break;
                 }
                 case TimeParts.Day:
                 case TimeParts.Days:
                 {
-                    value = value * dayHourCount;
+                    value = value * DayHourCount;
                     break;
                 }
             }

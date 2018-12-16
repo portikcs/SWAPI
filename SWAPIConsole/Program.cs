@@ -10,7 +10,11 @@ namespace SWAPIConsole
 {
     class Program
     {
-        private const string configPath = "appsettings.json";
+        protected Program()
+        {
+        }
+
+        private const string ConfigPath = "appsettings.json";
 
         static void Main(string[] args)
         {
@@ -22,7 +26,7 @@ namespace SWAPIConsole
                 }
                 else
                 {
-                    var stringDistance = string.Empty;
+                    string stringDistance;
                     if (args.Length == 0) 
                     {
                         Console.WriteLine("Please provide distance in MGLT :");
@@ -33,7 +37,7 @@ namespace SWAPIConsole
 
                     var builder = new ConfigurationBuilder()
                         .SetBasePath(Directory.GetCurrentDirectory())
-                        .AddJsonFile(configPath, optional: true, reloadOnChange: true);
+                        .AddJsonFile(ConfigPath, optional: true, reloadOnChange: true);
 
                     var configuration = builder.Build();
 

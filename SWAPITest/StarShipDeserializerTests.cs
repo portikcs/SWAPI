@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using NSubstitute.Core.Arguments;
 using NSubstitute.ExceptionExtensions;
 using SWAPIHelpers;
 using SWAPILogic;
 using SWAPIModel;
+using System;
 
 namespace SWAPITest
 {
@@ -30,9 +27,8 @@ namespace SWAPITest
         public void GivenTestJson_WhenCallDeserializeStarShips_ShouldReturnMockedObject()
         {
             //arrange
-            StarShipJsonResult _jsonResult = new StarShipJsonResult();
-            _jsonResult.Count = 10;
-            _jsonConvertWrapper.Deserialize(Arg.Any<string>()).Returns(_jsonResult);
+            StarShipJsonResult jsonResult = new StarShipJsonResult {Count = 10};
+            _jsonConvertWrapper.Deserialize(Arg.Any<string>()).Returns(jsonResult);
             var json = "Test data";
             //act
             var result = _starShipDeserializer.DeserializeStarShips(json);
@@ -45,8 +41,6 @@ namespace SWAPITest
         public void GivenExceptionTRhrowingMethod_WhenCallDeserializeStarShips_ShouldThrowException()
         {
             //arrange
-            StarShipJsonResult _jsonResult = new StarShipJsonResult();
-            _jsonResult.Count = 10;
             _jsonConvertWrapper.Deserialize(Arg.Any<string>()).Throws(new Exception("Test"));
             var json = "Test data";
             var message = string.Empty;

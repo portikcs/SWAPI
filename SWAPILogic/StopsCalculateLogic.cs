@@ -24,7 +24,7 @@ namespace SWAPILogic
             if(string.IsNullOrWhiteSpace(json)) return result;
             var ships = _starShipDeserializer.DeserializeStarShips(json);
             if(ships?.Results == null || !ships.Results.Any()) return result;
-            foreach (var ship in ships.Results) result.Add($"{ship.Name} :{ship.CountStops(distance)}");
+            foreach (var ship in ships.Results) result.Add($"{ship.Name}:{ship.CountStops(distance)}");
             return result;
         }
     }
