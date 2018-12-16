@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using SWAPIModel;
+﻿using SWAPIModel;
 
 namespace SWAPILogic
 {

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NSubstitute.ExceptionExtensions;
 using SWAPIHelpers;
 using SWAPIModel;
+using System;
 
 namespace SWAPITest
 {
@@ -53,7 +51,7 @@ namespace SWAPITest
         }
 
 
-        private string json = @"{
+        private readonly string json = @"{
     ""count"": 37,
     ""next"": ""https://swapi.co/api/starships/?page=2"",
     ""previous"": null,

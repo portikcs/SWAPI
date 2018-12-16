@@ -22,13 +22,14 @@ namespace SWAPIHelpers
             catch (WebException ex)
             {
                 var errorResponse = ex.Response;
+                string errorText;
                 using (Stream responseStream = errorResponse.GetResponseStream())
                 {
                     if (responseStream == null) throw;
                     var reader = new StreamReader(responseStream, System.Text.Encoding.GetEncoding("utf-8"));
-                    var errorText = await reader.ReadToEndAsync();
+                    errorText = await reader.ReadToEndAsync();
                 }
-                throw;
+                throw new WebException(errorText, ex.InnerException);
             }
         }
     }

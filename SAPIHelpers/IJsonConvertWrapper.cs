@@ -1,6 +1,6 @@
 ﻿namespace SWAPIHelpers
 {
-    public interface IJsonConvertWrapper<T>
+    public interface IJsonConvertWrapper<out T>
     {
         T Deserialize(string json);
     }

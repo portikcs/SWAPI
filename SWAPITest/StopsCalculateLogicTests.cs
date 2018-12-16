@@ -27,13 +27,14 @@ namespace SWAPITest
         public void GivenDistanceAndUrl_WhenCallCalculateStops_ShouldReturnValidResult()
         {
             //arrange
-            StarShipJsonResult _jsonResult = new StarShipJsonResult();
-            _jsonResult.Count = 10;
-            _jsonResult.Results = new List<StarShip>();
-            _jsonResult.Results.Add(new StarShip{Name = "Test", Consumables = "6 years", MGLT = 100});
+            StarShipJsonResult jsonResult = new StarShipJsonResult
+            {
+                Count = 10,
+                Results = new List<StarShip> {new StarShip {Name = "Test", Consumables = "6 years", Mglt = 100}}
+            };
             var json = "Test data";
             _apiHandlerWrapper.GetApiCallResultAsync(Arg.Any<string>()).Returns(json);
-            _starShipDeserializer.DeserializeStarShips(Arg.Any<string>()).Returns(_jsonResult);
+            _starShipDeserializer.DeserializeStarShips(Arg.Any<string>()).Returns(jsonResult);
             //act
             var result = _stopsCalculateLogic.CalculateStops(100000, "Test").Result;
             //assert
@@ -45,13 +46,14 @@ namespace SWAPITest
         public void GivenDistanceAndUrlEmptyJson_WhenCallCalculateStops_ShouldReturnEmptyResult()
         {
             //arrange
-            StarShipJsonResult _jsonResult = new StarShipJsonResult();
-            _jsonResult.Count = 10;
-            _jsonResult.Results = new List<StarShip>();
-            _jsonResult.Results.Add(new StarShip{Name = "Test", Consumables = "6 years", MGLT = 100});
+            StarShipJsonResult jsonResult = new StarShipJsonResult
+            {
+                Count = 10,
+                Results = new List<StarShip> {new StarShip {Name = "Test", Consumables = "6 years", Mglt = 100}}
+            };
             var json = "";
             _apiHandlerWrapper.GetApiCallResultAsync(Arg.Any<string>()).Returns(json);
-            _starShipDeserializer.DeserializeStarShips(Arg.Any<string>()).Returns(_jsonResult);
+            _starShipDeserializer.DeserializeStarShips(Arg.Any<string>()).Returns(jsonResult);
             //act
             var result = _stopsCalculateLogic.CalculateStops(100000, "Test").Result;
             //assert
@@ -63,20 +65,15 @@ namespace SWAPITest
         public void GivenDistanceAndUrlEmptyShipList_WhenCallCalculateStops_ShouldReturnEmptyResult()
         {
             //arrange
-            StarShipJsonResult _jsonResult = new StarShipJsonResult();
-            _jsonResult.Count = 10;
-            _jsonResult.Results = new List<StarShip>();
+            StarShipJsonResult jsonResult = new StarShipJsonResult {Count = 10, Results = new List<StarShip>()};
             var json = "Test data";
             _apiHandlerWrapper.GetApiCallResultAsync(Arg.Any<string>()).Returns(json);
-            _starShipDeserializer.DeserializeStarShips(Arg.Any<string>()).Returns(_jsonResult);
+            _starShipDeserializer.DeserializeStarShips(Arg.Any<string>()).Returns(jsonResult);
             //act
             var result = _stopsCalculateLogic.CalculateStops(100000, "Test").Result;
             //assert
             result.Count.Should().Be(0);
         }
-
-
-
 
     }
 }

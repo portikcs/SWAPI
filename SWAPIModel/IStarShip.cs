@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace SWAPIModel
 {
@@ -12,25 +11,25 @@ namespace SWAPIModel
 
         string Manufacturer { get; set; }
 
-        string Cost_in_credits { get; set; }
+        string CostInCredits { get; set; }
 
         double Length { get; set; }
 
-        string Max_atmosphering_speed { get; set; }
+        string MaxAtmospheringSpeed { get; set; }
 
         int Crew { get; set; }
 
         int Passengers { get; set; }
 
-        string Cargo_capacity { get; set; }
+        string CargoCapacity { get; set; }
 
         string Consumables { get; set; }
 
-        double Hyperdrive_rating { get; set; }
+        double HyperdriveRating { get; set; }
 
-        int MGLT { get; set; }
+        int Mglt { get; set; }
 
-        string Starship_class { get; set; }
+        string StarshipClass { get; set; }
 
         List<string> Pilots { get; set; }
 
