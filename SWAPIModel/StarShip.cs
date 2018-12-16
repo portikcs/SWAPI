@@ -51,7 +51,9 @@ namespace SWAPIModel
 
         public int CountStops(int distance)
         {
-            return distance / (ConsumablesInHoursAsync(Consumables) * MGLT);
+            var consumables = ConsumablesInHoursAsync(Consumables);
+            if (distance == 0 || MGLT == 0 || consumables == 0) return 0;
+            return distance / (consumables * MGLT);
         }
 
         private int ConsumablesInHoursAsync(string consumables)
