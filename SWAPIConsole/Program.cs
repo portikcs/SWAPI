@@ -16,12 +16,21 @@ namespace SWAPIConsole
         {
             try
             {
-                if (args.Length != 1)
+                if (args.Length > 1)
                 {
                     Console.WriteLine("The argument count is not valid, please use it with a single argument, that is containing the distance in 'MGLT'!");
                 }
                 else
                 {
+                    var stringDistance = string.Empty;
+                    if (args.Length == 0) 
+                    {
+                        Console.WriteLine("Please provide distance in MGLT :");
+                        stringDistance = Console.ReadLine();
+                    }
+                    else  stringDistance = args[0];
+                    
+
                     var builder = new ConfigurationBuilder()
                         .SetBasePath(Directory.GetCurrentDirectory())
                         .AddJsonFile(configPath, optional: true, reloadOnChange: true);
@@ -30,7 +39,7 @@ namespace SWAPIConsole
 
                     var url = configuration.GetSection("url").Value;
 
-                    if (!int.TryParse(args[0], out var distance))
+                    if (!int.TryParse(stringDistance, out var distance))
                     {
                         Console.WriteLine($"Could not convert the given argument {args[0]} to integer! ");
                     }
